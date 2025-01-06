@@ -4,6 +4,7 @@ import (
     "fmt"
     "strings"
     "gtop/core"
+    "gtop/module"
 )
 
 type App struct {
@@ -44,16 +45,11 @@ func (a *App) Run() {
                 }
                 
         }
-        
-        a.addToBuffer(
-            CreateProgressBar(7,0.5),
-            core.Position{ X: 44, Y: 20},
-            core.Size{ Col: 7, Row: 1}, 
-        )
+         
 
+        
         a.draw()
     }
-
 
 
 
@@ -92,8 +88,22 @@ func (a *App) draw() {
     }
     // start to paint at the top of the string
     core.GoHome()
+
     
+
     fmt.Printf("%s",sb.String())
+    
+    e := module.Entity {
+        Data: "This is a test",
+        ForegroundColor: FG_WHITE,
+        BackgroundColor: BG_RED,
+        GraphicMode: GM_NULL,
+    }
+
+    eStr := RenderEntity(e)
+
+    // move the cursor at the position where the entity should be drawn
+    fmt.Printf("\033[10;%dH%s",a.size.Col-14,eStr)
 }
 
 func (a *App) addToBuffer(b []rune, pos core.Position, size core.Size) {
