@@ -12,6 +12,6 @@ func (s Size) Area() int {
 
 
 type Position struct {
-    X int
-    Y int
+    Col int
+    Row int
 }
