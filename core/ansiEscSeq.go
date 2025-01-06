@@ -10,6 +10,10 @@ func ShowCursor() {
     fmt.Print("\033[?25h")
 }
 
+func MoveCursor(row int, col int) {
+    fmt.Printf("\033[%d;%dH",row,col)
+}
+
 // go to a buffer for keeping intact the current buffer where gtop
 // is executed
 func EnableAltBuffer() {        
