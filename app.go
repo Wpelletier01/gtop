@@ -81,11 +81,7 @@ func (a *App) draw() {
 //        GraphicMode: GM_NULL,
 //    }
 //
-//    eStr := RenderEntity(e)
+//    RenderEntity(e,core.Position{Col:a.size.Col-15,Row:10,})
 
-    // move the cursor at the position where the entity should be drawn
-    //core.MoveCursor(core.Position{Col:a.size.Col-14,Row:10,})
-    //fmt.Print(eStr)
-    //fmt.Printf("\033[10;3H%s",eStr)
 }
 

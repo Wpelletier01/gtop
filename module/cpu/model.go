@@ -9,14 +9,19 @@ import (
 
 type Core struct {
     name    int
+    percent float64
+    temp    int
 }
 
 type Cpu struct {
-    size    core.Size
-    //view    module.View
+    name        string
+    clockspeed  string
+    cores       []Core
+    
 } 
 
 
+func (c *Cpu) Init() {}
 
 func (c *Cpu) Collect() {}
 
@@ -27,6 +32,3 @@ func (c *Cpu) Resize(s core.Size) {
 
 }
 
-//func (c *Cpu) GetView() module.View {
-//    return c.view
-//}

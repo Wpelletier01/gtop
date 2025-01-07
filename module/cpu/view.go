@@ -3,6 +3,7 @@ package cpu;
 import (
     "gtop/module"
     "gtop/core"
+    "fmt"
 )
 
 // core mode
@@ -12,20 +13,20 @@ const (
     C_SHRINK
 )
 
-type CpuView struct { 
-
-} 
 
 
-type CoreView struct { 
-    size    core.Size
-    pos     core.Position
-}
+func coreBuilder(c Core, pos core.Position, mode int) []module.Renderable {
 
-func (cv *CoreView) build(mode int, core Core) []module.Entity  {
+    object := make([]module.Renderable,10,10)
     
-    entities := make([]module.Entity, 10)
-     
+    object[0] = module.NewText(
+        fmt.Sprintf("C%d",c.name),
+        core.GM_NULL,
+        core.FG_WHITE
 
-    return entities
-} 
+    )
+    
+    
+
+    return object
+}
