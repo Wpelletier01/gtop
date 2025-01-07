@@ -54,7 +54,9 @@ const (
     BORDER_TOP_RIGHT =      '┐'
     BORDER_BOTTOM_LEFT =    '└'
     BORDER_BOTTOM_RIGHT =   '┘'
-
+    BORDER_MIDDLE_TOP =     '┬'
+    BORDER_MIDDLE_BOTTOM =  '┴'
+    BORDER_MIDDLE_CENTER =  '┼'
 )
 
 
