@@ -133,14 +133,25 @@ func RenderScreenFrame(screenSize Size) {
         string(horizontal),
         BORDER_BOTTOM_RIGHT,
     )
-
+    
+    halfScreen := int(float64(screenSize.Col) / 2.0)+1
+    
+    
+    MoveCursor(1,halfScreen)
+    fmt.Printf("%c",BORDER_MIDDLE_TOP)
+        
     // right and left side
     for i:=2; i<screenSize.Row; i++ {
         MoveCursor(i,2)
         fmt.Printf("%c",BORDER_VERTICAL)
+        MoveCursor(i,halfScreen)
+        fmt.Printf("%c",BORDER_VERTICAL)
         MoveCursor(i,screenSize.Col)
         fmt.Printf("%c",BORDER_VERTICAL)
     }
+    
+    MoveCursor(screenSize.Row,halfScreen)
+    fmt.Printf("%c",BORDER_MIDDLE_BOTTOM)
 
 }
 
