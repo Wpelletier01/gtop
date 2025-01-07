@@ -42,10 +42,11 @@ const (
     BG_DEFAULT
 )
 
+// Character
 const (
     
-    PBAR_EMPTY = '▱'
-    PBAR_FULL = '▰'
+    PBAR_EMPTY = '▢'
+    PBAR_FULL = '■'
     
     BORDER_HORIZONTAL =     '─'
     BORDER_VERTICAL =       '│'
