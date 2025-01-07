@@ -108,7 +108,7 @@ func (p ProgressBar) getPos() Position {
 
 
 func RenderScreenFrame(screenSize Size) {
-    
+     
     // top left
     MoveCursor(0,2)
     
@@ -134,6 +134,8 @@ func RenderScreenFrame(screenSize Size) {
         BORDER_BOTTOM_RIGHT,
     )
     
+    
+    // TODO: maybe a better way to render the middle border
     halfScreen := int(float64(screenSize.Col) / 2.0)+1
     
     
