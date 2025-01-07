@@ -71,7 +71,37 @@ func (a *App) draw() {
     
 
     
-    RenderScreenFrame(a.size)
+    core.RenderScreenFrame(a.size)
+
+    content := make([]core.Renderable,2,2)
+
+    text := core.NewText(
+        "This is some text",
+        core.GM_RESET,
+        core.FG_WHITE,
+        core.BG_RED,
+        15,
+        40,
+    )
+    
+    pbar := core.NewProgressBar(
+        0.9,
+        core.FG_GREEN,
+        core.BG_DEFAULT,
+        6,
+        30,
+        26,
+    )
+
+
+    content[0] = text
+    content[1] = pbar
+    
+   
+    for _, obj := range content {
+        core.RenderObject(obj)
+    }
+
 //    fmt.Printf("%s",sb.String())
 //    
 //    e := module.Entity {
