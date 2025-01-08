@@ -106,6 +106,49 @@ func (p ProgressBar) getPos() Position {
 }
 
 
+func RenderFrame(p Position, s Size) {
+     
+    // top left
+    MoveCursor(p.Row,p.Col)
+    
+    horizontal := make([]rune,s.Col)
+    
+    for i:=0; i < s.Col-3; i++ {
+        horizontal[i] = BORDER_HORIZONTAL
+    }
+
+    fmt.Printf(
+        "%c%s%c",
+        BORDER_TOP_LEFT,
+        string(horizontal),
+        BORDER_TOP_RIGHT,
+    )
+
+    // Bottom 
+    MoveCursor(p.Row+s.Row,p.Col) // let place for menu bar
+    fmt.Printf(
+        "%c%s%c",
+        BORDER_BOTTOM_LEFT,
+        string(horizontal),
+        BORDER_BOTTOM_RIGHT,
+    )
+    
+        
+    // right and left side
+    for i:=2; i<s.Row; i++ {
+        MoveCursor(p.Row + i, p.Col)
+        fmt.Printf("%c",BORDER_VERTICAL)
+        MoveCursor(p.Row + i, p.Col + s.Col-1)
+        fmt.Printf("%c",BORDER_VERTICAL)
+    }
+    
+}
+
+
+
+
+
+
 
 func RenderScreenFrame(screenSize Size) {
      
