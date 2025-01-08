@@ -5,13 +5,15 @@ import (
     "os/signal"
     "syscall"
     "fmt"
+    "time"
 )
 
 
 type EventRegister struct {
     
-    Resize  chan Size
-    Input   chan []byte
+    Resize      chan Size
+    Input       chan []byte
+    NeedRedraw  chan bool    
 
 }
 
@@ -79,4 +81,10 @@ func listenForInput(ec chan []byte) {
 
 }
 
+func NeedToRedraw(ec chan bool) {
+    
+    time.Sleep(DRAW_MAX_TIME * time.Second)
+    ec <-true
+
+}
  

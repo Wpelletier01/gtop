@@ -1,8 +1,9 @@
 package main
 
 import (
-    "gtop/core"
-    //"gtop/module"
+	"fmt"
+	"gtop/core"
+	//"gtop/module"
 )
 
 type App struct {
@@ -20,7 +21,10 @@ func (a *App) Run() {
 
     main:
     for {
-        
+
+        a.event.NeedRedraw = make(chan bool)
+        go core.NeedToRedraw(a.event.NeedRedraw)
+
         select {
             
             case nSize := <-a.event.Resize:
@@ -40,11 +44,10 @@ func (a *App) Run() {
                     // [C right
                     // [D left
                 }
-                
+            case <-a.event.NeedRedraw:
+                // We need to draw        
         }
          
-
-        
         a.draw()
     }
 
