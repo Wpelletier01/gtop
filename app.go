@@ -1,16 +1,45 @@
 package main
 
 import (
-	"fmt"
 	"gtop/core"
+	"gtop/module"
+	"math"
 	//"gtop/module"
+	"gtop/module/cpu"
 )
 
 type App struct {
     size        core.Size
-    event       core.EventRegister             
+    event       core.EventRegister
+    modules     []module.Model
 }  
 
+
+func (a *App) initModules() {
+    
+    ts := core.GetTerminalSize()
+    
+    a.size.Col = int(ts.Col)
+    a.size.Row = int(ts.Row)
+
+    a.modules = make([]module.Model, 1, 1)
+    
+
+    var cpuModel cpu.Cpu
+    
+
+    
+    
+    quarterHeight := int(math.Floor(float64(a.size.Row) / 4.0))
+    halfWidth := int(math.Round(float64(a.size.Col)/2.0))
+
+    cpuModel.Init(core.Position{Col: 0, Row: 0}, core.Size{Col: halfWidth, Row: quarterHeight})
+    
+
+    a.modules[0] = cpuModel
+    
+
+}
 
 
 func (a *App) Run() {
@@ -18,10 +47,14 @@ func (a *App) Run() {
 
     // start event listener
     a.event.StartListener()
+    
+    a.initModules() 
+    
+    a.drawStatic() // init draw
 
     main:
     for {
-
+        
         a.event.NeedRedraw = make(chan bool)
         go core.NeedToRedraw(a.event.NeedRedraw)
 
@@ -30,6 +63,7 @@ func (a *App) Run() {
             case nSize := <-a.event.Resize:
 
                 a.resize(nSize)
+                a.drawStatic()
             
             case input := <-a.event.Input:
                 if input[0] == 27 { // maybe an ansi esc seq 
@@ -48,7 +82,7 @@ func (a *App) Run() {
                 // We need to draw        
         }
          
-        a.draw()
+        a.drawDynamic()
     }
 
 
@@ -66,7 +100,20 @@ func (a *App) resize(s core.Size) {
     
 }
 
+func (a *App) drawStatic() {
 
+    core.ClearScreen()
+    core.RenderFrame(core.Position{Col: 0, Row: 0,},a.size)
+
+    for _,module := range a.modules {
+        module.DrawStatic()
+    }
+
+}
+
+func (a *App) drawDynamic() {
+
+}
 
 func (a *App) draw() {
     
@@ -75,7 +122,7 @@ func (a *App) draw() {
 
     
     core.RenderScreenFrame(a.size)
-
+    
     content := make([]core.Renderable,2,2)
 
     text := core.NewText(
