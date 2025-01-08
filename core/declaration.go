@@ -1,5 +1,11 @@
 package core;
 
+// General
+const (
+    // max time before screen should call draw func in second
+    DRAW_MAX_TIME = 3
+)
+
 const (
     ESC = '\x1b'
 )
