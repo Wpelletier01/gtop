@@ -1,32 +1,35 @@
 package cpu;
 
 import (
-    "gtop/module"
+    //"gtop/module"
     "gtop/core"
-    "fmt"
-)
-
-// core mode
-const (
-    C_NORMAL = iota
-    // no progress bar
-    C_SHRINK
+    //"fmt"
 )
 
 
 
-func coreBuilder(c Core, pos core.Position, mode int) []module.Renderable {
 
-    object := make([]module.Renderable,10,10)
+
+
+func generateStaticView(pos core.Position) []core.Renderable {
+
+    var obj []core.Renderable
     
-    object[0] = module.NewText(
-        fmt.Sprintf("C%d",c.name),
-        core.GM_NULL,
-        core.FG_WHITE
-
+    
+    moduleTitle := core.NewText(
+        "CPU",
+        core.GM_BOLD,
+        core.FG_DEFAULT,
+        core.BG_DEFAULT,
+        2,
+        2,
     )
     
-    
+    obj = append(obj,moduleTitle)
 
-    return object
+    return obj
+
 }
+
+
+// 
